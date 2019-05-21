@@ -1,33 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import api from '@/services/api';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     tools: [],
-    searchTerm: null,
+    searchTerm: '',
     tagsOnly: false,
-    fakeDB: [
-      {
-        title: "NodeJS",
-        link: "#",
-        description: `Node is Power of Java Script!`,
-        tags: ["node"]
-      },
-      {
-        title: "json-server",
-        link: "#",
-        description: `Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.`,
-        tags: ["api", "json", "schema", "node", "github", "rest"]
-      },
-      {
-        title: "fastfy",
-        link: "#",
-        description: `Extremely fast and simple, low-overhead web framework for NodeJS. Suports HTTP2.`,
-        tags: ["web", "framework", "node", "http2"]
-      },
-    ],
   },
   getters: {
     searchTerm: state => state.searchTerm,
@@ -45,35 +26,36 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setTagsOnly(context, tagsOnly) {
-      context.commit('setTagsOnly', tagsOnly);
-      if(context.getters.searchTerm) {
-        context.dispatch('chamadaAPI');
-      }
-    },
     search(context, searchTerm) {
       context.commit('setSearchTerm', searchTerm);
-      context.dispatch('chamadaAPI');
+      context.dispatch('callSearchAPI');
     },
-    chamadaAPI(context) {
-      if(context.state.tagsOnly) {
-        context.commit('setTools', context.state.fakeDB);
-      } else {
-        context.commit('setTools', [
-          {
-            title: "json-server " + Math.round(100*Math.random()),
-            link: "#",
-            description: `Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.`,
-            tags: ["api", "json", "schema", "node", "github", "rest"]
-          },
-          {
-            title: "fastfy",
-            link: "#",
-            description: `Extremely fast and simple, low-overhead web framework for NodeJS. Suports HTTP2.`,
-            tags: ["web", "framework", "node", "http2"]
-          }
-        ]);
+    setTagsOnly(context, tagsOnly) {
+      context.commit('setTagsOnly', tagsOnly);
+      if (context.getters.searchTerm) {
+        context.dispatch('callSearchAPI');
       }
+    },
+    async tools(context) {
+      const response = await api.get('tools');
+      context.commit('setTools', response.data);
+    },
+    async callSearchAPI(context) {
+      if (context.state.tagsOnly) {
+        const response = await api.get(`tools?tags_like=${context.state.searchTerm}`);
+        context.commit('setTools', response.data);
+      } else {
+        const response = await api.get(`tools?q=${context.state.searchTerm}`);
+        context.commit('setTools', response.data);
+      }
+    },
+    async remove(context, tool) {
+      const response = await api.delete(`tools/${tool.id}`);
+      context.dispatch('callSearchAPI');
+    },
+    async create(context, tool) {
+      const response = await api.post('tools', tool);
+      context.dispatch('callSearchAPI');
     },
   },
 });

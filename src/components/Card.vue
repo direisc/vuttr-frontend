@@ -2,11 +2,12 @@
   <div class="card">
     <div class="card-content">
       <div class="content">
-        <a :href="link">{{ title }}</a>
-        <a href="#" class="is-pulled-right">remove</a>
-        <p>{{ description }}</p>
+        <a :href="tool.link" v-if="tool.link">{{ tool.title }}</a>
+        <span v-if="!tool.link">{{ tool.title }}</span>
+        <a href="#" class="is-pulled-right" @click.prevent="remove">remove</a>
+        <p>{{ tool.description }}</p>
         <p class="tags">
-          <span class="tag" v-for="tag in tags">#{{ tag }}</span>
+          <span class="tag" v-for="tag in tool.tags">#{{ tag }}</span>
         </p>
       </div>
     </div>
@@ -18,13 +19,11 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class Card extends Vue {
-  @Prop() private title!: string;
+  @Prop() private tool!: object;
 
-  @Prop() private link!: string;
-
-  @Prop() private description!: string;
-
-  @Prop() private tags!: [string];
+  remove(){
+    this.$store.dispatch("remove", this.tool);
+  }
 }
 </script>
 
