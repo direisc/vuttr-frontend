@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "vue-cli-service build",
-    "start": "node server.js",
-    "dev": "vue-cli-service serve",
+    "oto": "node server.js",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bulma": "^0.7.5",
     "core-js": "^2.6.7",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
@@ -26,7 +27,6 @@
     "@vue/eslint-config-airbnb": "^4.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
     "babel-eslint": "^10.0.1",
-    "bulma": "^0.7.4",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
