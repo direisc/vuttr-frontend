@@ -1,23 +1,14 @@
 # vuttr-frontend
 Um front-end para a aplicação VUTTR (Very Useful Tools to Remember). A aplicação é um simples repositório para gerenciar ferramentas com seus respectivos nomes, links, descrições e tags.
 
-## Como executar
-Faça o clone/download deste repositório, execute `npm install` ou `yarn install` e `npm run serve` ou `yarn run serve`. A aplicação executa por padrâo em `http://localhost:8080/`.
-
 ## Project setup
-```
-yarn install
-```
+Faça o clone/download deste repositório, execute `yarn install`.
 
 ### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+Execute `yarn run serve` para ter a aplicação executando com hot-reloads agilizando o desenvolvimento. A aplicação executa por padrâo em `http://localhost:8080/`.
 
 ### Compiles and minifies for production
-```
-yarn run build
-```
+Execute `yarn run build` para compilar a aplicação para produção.
 
 ### Run your tests
 ```
