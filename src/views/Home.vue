@@ -19,6 +19,7 @@
               </label>
             </p>
           </div>
+          <div class="field"></div>
           <div class="field">
             <p class="control is-expanded">
               <a class="button is-primary is-fullwidth" @click.prevent="addButton">
