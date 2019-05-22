@@ -33,7 +33,7 @@
       </div>
     </section>
     <section class="section">
-      <Card v-for="tool in $store.getters.tools" v-bind:key="tool.id" :tool="tool" />
+      <Card v-for="tool in $store.getters.tools" v-bind:key="tool.id" :tool="tool"/>
     </section>
     <div class="modal" :class="{ 'is-active': addModal }">
       <div class="modal-background"></div>
@@ -58,10 +58,7 @@
           <div class="field">
             <label class="label">Tool description</label>
             <div class="control">
-              <textarea
-                class="textarea"
-                placeholder="Tool description"
-                v-model="tool.description"></textarea>
+              <textarea class="textarea" placeholder="Tool description" v-model="tool.description"></textarea>
             </div>
           </div>
           <div class="field">
@@ -81,8 +78,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import Card from '@/components/Card.vue';
+import { Component, Vue } from "vue-property-decorator";
+import Card from "@/components/Card.vue";
 
 class Tool {
   title?: string;
@@ -98,8 +95,8 @@ class Tool {
 
 @Component({
   components: {
-    Card,
-  },
+    Card
+  }
 })
 export default class Home extends Vue {
   private addModal = false;
@@ -107,7 +104,7 @@ export default class Home extends Vue {
   private tool: Tool = {};
 
   mounted() {
-    this.$store.dispatch('tools');
+    this.$store.dispatch("tools");
   }
 
   get tagsOnly() {
@@ -115,16 +112,16 @@ export default class Home extends Vue {
   }
 
   set tagsOnly(value) {
-    this.$store.dispatch('setTagsOnly', value);
+    this.$store.dispatch("setTagsOnly", value);
   }
 
   search(event: any) {
     console.log(event);
-    this.$store.dispatch('search', event.target.value);
+    this.$store.dispatch("search", event.target.value);
   }
 
   setSearchTerm(event: any) {
-    this.$store.commit('setSearchTerm', event.target.value);
+    this.$store.commit("setSearchTerm", event.target.value);
   }
 
   addButton() {
@@ -134,11 +131,11 @@ export default class Home extends Vue {
 
   addTool() {
     if (this.tool.tagsInput) {
-      this.tool.tags = this.tool.tagsInput.split(' ');
+      this.tool.tags = this.tool.tagsInput.split(" ");
     }
     this.tool.tagsInput = undefined;
     console.log(this.tool);
-    this.$store.dispatch('create', this.tool);
+    this.$store.dispatch("create", this.tool);
     this.addModal = !this.addModal;
   }
 }

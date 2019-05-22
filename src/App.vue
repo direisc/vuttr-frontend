@@ -16,25 +16,25 @@
 @charset "utf-8";
 // @import "../node_modules/bulma/bulma.sass";
 
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&display=swap");
 
-$family-sans-serif: 'Source Sans Pro', sans-serif;
-$body-size: 20px;
+$family-sans-serif: "Source Sans Pro", sans-serif;
+// $body-size: 20px;
 $strong-weight: 600;
 $radius: 5px;
 
-.button{
+.button {
   font-weight: $strong-weight;
 }
 
-$white: #FFF;
-$ink: #DEDCE1;
-$blue: #365DF0;
-$green: #12DB89;
-$red: #F95E5A;
-$yellow: #FFBB43;
-$purple: #6554C0;
-$teal: #30C3FC;
+$white: #fff;
+$ink: #dedce1;
+$blue: #365df0;
+$green: #12db89;
+$red: #f95e5a;
+$yellow: #ffbb43;
+$purple: #6554c0;
+$teal: #30c3fc;
 
 $primary: $blue;
 $link: $blue;
@@ -52,10 +52,12 @@ $modal-card-body-padding: 0 30px;
 .delete {
   background: none !important;
 }
-.delete::before, .modal-close::before, .delete::after, .modal-close::after {
-  background-color: #8F8A9B !important;
+.delete::before,
+.modal-close::before,
+.delete::after,
+.modal-close::after {
+  background-color: #8f8a9b !important;
 }
-
 
 @import "../node_modules/bulma/sass/utilities/_all";
 @import "../node_modules/bulma/sass/base/_all";
@@ -63,6 +65,4 @@ $modal-card-body-padding: 0 30px;
 @import "../node_modules/bulma/sass/components/_all";
 @import "../node_modules/bulma/sass/grid/_all";
 @import "../node_modules/bulma/sass/layout/_all";
-
-
 </style>
