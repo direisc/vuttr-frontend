@@ -50,7 +50,7 @@ export default new Vuex.Store({
       }
     },
     async remove(context, tool) {
-      const response = await api.delete(`tools/${tool.id}`);
+      const response = await api.delete(`tools/${tool._id}`);
       context.dispatch('callSearchAPI');
     },
     async create(context, tool) {

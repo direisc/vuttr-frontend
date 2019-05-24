@@ -34,10 +34,10 @@
       </div>
     </section>
     <section class="section">
-      <Card v-for="tool in $store.getters.tools" v-bind:key="tool.id" :tool="tool"/>
+      <Card v-for="tool in $store.getters.tools" v-bind:key="tool._id" :tool="tool"/>
     </section>
-    <div class="modal" :class="{ 'is-active': addModal }">
-      <div class="modal-background"></div>
+    <div class="modal" :class="{ 'is-active': addModal }" @keyup.esc="close" tabindex="0">
+      <div class="modal-background" @click.prevent="addButton"></div>
       <div class="modal-card">
         <header class="modal-card-head is-radiusless">
           <p class="modal-card-title">Add new tool</p>
@@ -123,6 +123,10 @@ export default class Home extends Vue {
 
   setSearchTerm(event: any) {
     this.$store.commit("setSearchTerm", event.target.value);
+  }
+
+  close() {
+    this.addModal = false;
   }
 
   addButton() {
