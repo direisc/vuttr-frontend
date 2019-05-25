@@ -50,12 +50,26 @@ export default new Vuex.Store({
       }
     },
     async remove(context, tool) {
-      const response = await api.delete(`tools/${tool._id}`);
-      context.dispatch('callSearchAPI');
+      try {
+        const response = await api.delete(`tools/${tool._id}`);
+        Vue.swal('Removed!', 'Tool has been removed.', 'success');
+        context.dispatch('callSearchAPI');
+      } catch (error) {
+        if (error.response.status === 401) {
+          Vue.swal('You are Unauthorized!', 'Tool can not be removed.', 'info');
+        } else {
+          Vue.swal('Sorry!', 'Tool can not be removed. Try again!', 'error');
+        }
+      }
     },
     async create(context, tool) {
-      const response = await api.post('tools', tool);
-      context.dispatch('callSearchAPI');
+      try {
+        const response = await api.post('tools', tool);
+        Vue.swal('Added!', 'Tool has been added.', 'success');
+        context.dispatch('callSearchAPI');
+      } catch (error) {
+        Vue.swal('Sorry!', 'Server cannot process request. Try again!', 'error');
+      }
     },
   },
 });

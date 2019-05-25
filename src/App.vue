@@ -66,4 +66,18 @@ $modal-card-body-padding: 0 30px;
 @import "../node_modules/bulma/sass/components/_all";
 @import "../node_modules/bulma/sass/grid/_all";
 @import "../node_modules/bulma/sass/layout/_all";
+
+$swal2-border-radius: $radius;
+$swal2-input-border-radius: $radius;
+$swal2-confirm-button-border-radius: $radius;
+$swal2-cancel-button-border-radius: $radius;
+
+@import "sweetalert2/src/sweetalert2.scss";
+
+.swal2-actions .button:not(:last-child):not(.is-fullwidth) {
+  margin-right: 0.7rem !important;
+}
+.swal2-cancel {
+  color: $primary !important;
+}
 </style>

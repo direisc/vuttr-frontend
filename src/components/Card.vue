@@ -4,7 +4,7 @@
       <div class="content">
         <a :href="tool.link" v-if="tool.link">{{ tool.title }}</a>
         <span v-if="!tool.link">{{ tool.title }}</span>
-        <a href="#" class="is-pulled-right" @click.prevent="callRemove">remove</a>
+        <a href="#" class="is-pulled-right" @click.prevent="remove">remove</a>
         <p>{{ tool.description }}</p>
         <p class="tags">
           <span class="tag" v-for="tag in tool.tags">#{{ tag }}</span>
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Card extends Vue {
@@ -45,7 +45,16 @@ export default class Card extends Vue {
   }
 
   remove() {
-    this.$store.dispatch("remove", this.tool);
+    Vue.swal({
+      title: 'Remove tool',
+      text: `Are you sure you want to remove ${this.tool.title}?`,
+      showCancelButton: true,
+      confirmButtonText: 'Yes, remove it!',
+    }).then((result) => {
+      if (result.value) {
+        this.$store.dispatch('remove', this.tool);
+      }
+    });
   }
 }
 </script>
