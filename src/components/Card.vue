@@ -7,54 +7,34 @@
         <a href="#" class="is-pulled-right" @click.prevent="remove">remove</a>
         <p>{{ tool.description }}</p>
         <p class="tags">
-          <span class="tag" v-for="tag in tool.tags">#{{ tag }}</span>
+          <span class="tag" v-for="tag in tool.tags" :key="tag">#{{ tag }}</span>
         </p>
-      </div>
-    </div>
-
-    <div class="modal" :class="{ 'is-active': removeConfirm }">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head is-radiusless">
-          <p class="modal-card-title">Remove tool</p>
-          <button class="delete is-large" aria-label="close" @click.prevent="callRemove"></button>
-        </header>
-        <section class="modal-card-body">
-          <p>Are you sure you want to remove {{ tool.title }}?</p>
-        </section>
-        <footer class="modal-card-foot is-radiusless">
-          <button class="button is-primary" @click.prevent="remove">Yes, remove</button>
-          <button class="button" @click.prevent="callRemove">Cancel</button>
-        </footer>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class Card extends Vue {
-  @Prop() private tool!: object;
-
-  private removeConfirm: boolean = false;
-
-  callRemove() {
-    this.removeConfirm = !this.removeConfirm;
-  }
+  @Prop() private tool!: any;
 
   remove() {
-    Vue.swal({
-      title: 'Remove tool',
-      text: `Are you sure you want to remove ${this.tool.title}?`,
-      showCancelButton: true,
-      confirmButtonText: 'Yes, remove it!',
-    }).then((result) => {
-      if (result.value) {
-        this.$store.dispatch('remove', this.tool);
-      }
-    });
+    const text = `Are you sure you want to remove ${this.tool.title}?`;
+    this.$store.getters
+      .swal({
+        title: "Remove tool",
+        text,
+        showCancelButton: true,
+        confirmButtonText: "Yes, remove it!"
+      })
+      .then((result: any) => {
+        if (result.value) {
+          this.$store.dispatch("remove", this.tool);
+        }
+      });
   }
 }
 </script>
